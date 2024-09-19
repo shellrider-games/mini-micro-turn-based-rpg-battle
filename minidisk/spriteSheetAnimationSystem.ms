@@ -4,11 +4,11 @@ Animation = {}
 Animation.frames = []
 Animation.initialised = false
 
-Animation.resetNextFrameTimer = function()
+Animation.resetNextFrameTimer = function
     self.nextFrameTimer = 1/self.fps
 end function
 
-Animation.addToTimer = function()
+Animation.addToTimer = function
     self.nextFrameTimer = self.nextFrameTimer + 1/self.fps
 end function
 
@@ -28,7 +28,7 @@ Animation.update = function(delta)
     end if
 end function
 
-Animation.getFrame = function()
+Animation.getFrame = function
     return self.frames[self.currentFrame]
 end function
 
@@ -74,15 +74,14 @@ SpriteSheetAnimationSystem.update = function(delta)
     if self.currentAnimation != null then self.animations[self.currentAnimation].update delta
 end function
 
-SpriteSheetAnimationSystem.getFrame = function()
+SpriteSheetAnimationSystem.getFrame = function
     if self.currentAnimation != null then 
         frame = self.animations[self.currentAnimation].getFrame()
     end if
     return frame
 end function
 
-runUnitTests = function ()
-    //test SpriteSheetAnimationSystem.init with tileset found in "/sys/pics"
+runUnitTests = function
     testSystem = new SpriteSheetAnimationSystem
     qa.assertEqual testSystem.initialised, false
     testSystem.init "/sys/pics/SimplePlatformTiles.png", 12, 8
