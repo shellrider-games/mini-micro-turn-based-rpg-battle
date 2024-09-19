@@ -7,7 +7,7 @@ Character.takeDamage = function(amount)
     self.hitpoints -= amount
 end function
 
-if locals == globals then
+runUnitTests = function
     print "Running character tests"
     testCharacter = new Character
     print "Characters have hitpoints which are a number"
@@ -17,4 +17,6 @@ if locals == globals then
     testCharacter.takeDamage 3
     qa.assertEqual (currentHitpointValue-testCharacter.hitpoints), 3
     print "Tests complete"
-end if
+end function
+
+if locals == globals then runUnitTests
