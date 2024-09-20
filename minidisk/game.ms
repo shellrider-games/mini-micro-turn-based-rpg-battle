@@ -44,3 +44,6 @@ while not key.pressed("q")
     end for
     
 end while
+
+key.clear
+clear
