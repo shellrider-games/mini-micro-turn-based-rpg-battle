@@ -3,6 +3,8 @@ import "spriteSheetAnimationSystem"
 
 clear
 
+animatedSprites = []
+
 heroAnimationSystem = new spriteSheetAnimationSystem.SpriteSheetAnimationSystem
 heroAnimationSystem.init "spritesheets/adventurer-Sheet.png", 7, 11
 heroAnimationSystem.addAnimation "idle", [[3,5],[4,5],[5,5],[6,5]], 6
@@ -27,13 +29,18 @@ slimeSprite.y = 236
 slimeSprite.scale = 4
 display(4).sprites.push slimeSprite
 
+animatedSprites.push { "animationSystem": heroAnimationSystem, "sprite": heroSprite }
+animatedSprites.push { "animationSystem": slimeAnimationSystem, "sprite": slimeSprite }
+
 lastTimestamp = time
-while 1
+while not key.pressed("q")
     currentTimestamp = time
     delta = currentTimestamp - lastTimestamp
     lastTimestamp = currentTimestamp
-    heroAnimationSystem.update delta
-    slimeAnimationSystem.update delta
-    heroSprite.image = heroAnimationSystem.getFrame
-    slimeSprite.image = slimeAnimationSystem.getFrame
+    
+    for animatedSprite in animatedSprites
+        animatedSprite.animationSystem.update delta
+        animatedSprite.sprite.image = animatedSprite.animationSystem.getFrame
+    end for
+    
 end while
